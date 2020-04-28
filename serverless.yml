@@ -1,0 +1,31 @@
+service: lambda-gorunner
+
+frameworkVersion: '>=1.28.0 <2.0.0'
+
+provider:
+  name: aws
+  runtime: go1.x
+
+  # Setup global environment variables for lambda
+  # Defaults could be overridden using .env file
+  environment:
+    SSH_KEY: ${env:SSH_KEY, file(${env:SSH_KEY_PATH})}
+    DEBUG: ${env:DEBUG, '*'}
+    MAX_SESSIONS: ${env:MAX_SESSIONS, 100}
+    TIMEOUT: ${env:TIMEOUT}
+    USERS: ${env:USERS, 'ec2-user'}
+    FACTS: ${env:FACTS}
+
+package:
+  exclude:
+    - ./**
+  include:
+    - ./bin/**
+
+functions:
+  gorunner:
+    handler: bin/gorunner
+    events:
+      - http:
+          path: /
+          method: get
