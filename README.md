@@ -1,11 +1,12 @@
 # lambda-gorunner
 
-Lightweight and fast SSH commands executor implementation made with `Golang` for AWS lambda.
+Lightweight and fast lambda function for SSH commands execution written in `Go`.
 
-It will try to connect and execute list of ssh commands on `EC2` instances in current AWS account and will collect command outputs without stopping on errors.
-Outputs will be stored and returned in the resulting response.
+It will try to connect and execute list of given ssh commands on `EC2` instances in current AWS account without stopping on errors.
+The `stdout` outputs will be stored and returned in the resulting response.
 
-The intended use case of this tool is to collect facts from executing ssh commands on large scales of instances. There is an duration limit for lambda functions (up to 15 minutes), so function should be fast and able to spawn several SSH sessions in parallel. Sessions number is controlled by `MAX_SESSIONS` variable. Ssh session connection timeouts are controlled by `TIMEOUT` variable.
+The intended use case of this tool is to collect facts from ssh commands execution on large scale of instances. Lamdas are cheap, but there is a duration limit for them (up to 15 minutes), so function should be fast and be able to spawn multiple SSH sessions in parallel.
+Sessions number is controlled by `MAX_SESSIONS` variable. Ssh session connection timeouts are controlled by `TIMEOUT` variable.
 
 Lambda function deploy is provided by [serverless](https://serverless.com/) framework.
 
