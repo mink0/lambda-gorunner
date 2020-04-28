@@ -41,7 +41,8 @@ Lambda function deploy is provided by [serverless](https://serverless.com/) fram
 
 ### Dotenv
 
-All variables from `.env` will be loaded in environment. It is made in `Makefile` without using any additional plugins.
+All variables from `.env` will be loaded into serverless environment.
+No additional plugins are needed.
 
 ### Commands
 
